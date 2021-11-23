@@ -47,16 +47,6 @@ export class HomeComponent implements OnInit {
       this.buscarFilmesPopulares();
   }
 
-  addFilmeAPlayList(filme: IFilme): void{
-    this.filmesService.addFilmeAPlaylist(filme).subscribe(resposta => {
-      this.filmesService.exibirMensagens(
-        'Sua PlayList',
-        `${filme.title} foi adicionado a sua playlist}`,
-        'toast-success'
-      );
-    });
-  }
-
   buscarFilmeDaPlaylist(): void{
     this.filmesService.buscarFilmeDaPlaylist().subscribe(result => {
       this.listaDeFilmes.results = result.results;

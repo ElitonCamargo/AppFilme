@@ -1,3 +1,4 @@
+import { SharedModule } from './shared/shared.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -24,6 +25,7 @@ import { DetalhesComponent } from './componentes/detalhes/detalhes.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    SharedModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
   ],

@@ -1,5 +1,4 @@
 import { IFilme } from './../models/IFilme.model';
-import { IFilmeApi, IListaFilmeApi } from './../models/IFilmeApi.model';
 import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders} from '@angular/common/http';
@@ -48,49 +47,30 @@ export class FilmesService {
     );
   }
 
-  public addFilmeAPlaylist(filme: IFilme): Observable<IFilmeApi>{
+  public addFilmeAPlaylist(filme: IFilme): Observable<IFilme>{
     const url = 'https://parseapi.back4app.com/classes/Filme';
     const configApi = {
-      'X-Parse-Application-Id':'sppUa0RnIdfZhrVFpC63cuF6WRLKIEQh3sGxwPFe',
-      'X-Parse-REST-API-Key':'J7RXIr1LnPs5vRz49BIqsXCF5l8h8qGeyhUFNMc5',
-      'Content-Type':'application/json'
+      'X-Parse-Application-Id':'4ETSbC61A032K0G25XdVCZuB8cSZ43fMbrkFNnSR',
+      'X-Parse-REST-API-Key':'dyrrr9PEAiRnVGVuR3837WTRleojUuf54lhvEsYT'
     }
     const headers = new HttpHeaders(configApi);
-
-    let filmeApi: IFilmeApi;
-
-    filmeApi = {
-      poster_path: filme.poster_path,
-      adult: filme.adult,
-      overview: filme.overview,
-      release_date: filme.release_date,
-      genre_ids: filme.genre_ids,
-      codigo: filme.id,
-      original_title: filme.original_title,
-      original_language: filme.original_language,
-      title: filme.title,
-      backdrop_path: filme.backdrop_path,
-      popularity: filme.popularity,
-      vote_count: filme.vote_count,
-      video: filme.video,
-      vote_average: filme.vote_average,
-    };
-
-    return this.http.post<IFilmeApi>(url, filmeApi,{headers}).pipe(
+    filme.iD = filme.id;
+    delete filme.id;
+    return this.http.post<IFilme>(url, filme,{headers}).pipe(
       map(retorno => retorno),
       catchError(error=>this.exibirErro(error))
     );
   }
 
-  public buscarFilmeDaPlaylist(): Observable<IListaFilmeApi>{
+  public buscarFilmeDaPlaylist(): Observable<IListaFilmes>{
     const url = 'https://parseapi.back4app.com/classes/Filme';
     const configApi = {
-      'X-Parse-Application-Id':'sppUa0RnIdfZhrVFpC63cuF6WRLKIEQh3sGxwPFe',
-      'X-Parse-REST-API-Key':'J7RXIr1LnPs5vRz49BIqsXCF5l8h8qGeyhUFNMc5'
+      'X-Parse-Application-Id':'4ETSbC61A032K0G25XdVCZuB8cSZ43fMbrkFNnSR',
+      'X-Parse-REST-API-Key':'dyrrr9PEAiRnVGVuR3837WTRleojUuf54lhvEsYT'
     }
     const headers = new HttpHeaders(configApi);
 
-    return this.http.get<IListaFilmeApi>(url,{headers}).pipe(
+    return this.http.get<IListaFilmes>(url,{headers}).pipe(
       map(retorno => retorno),
       catchError(error=>this.exibirErro(error))
     );
